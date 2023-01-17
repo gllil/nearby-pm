@@ -1,0 +1,13 @@
+.nav-phone a {
+  text-decoration: none;
+  color: #ff8036;
+}
+
+.nav-phone a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar-nav .nav-link.active {
+  color: #ff8036;
+}

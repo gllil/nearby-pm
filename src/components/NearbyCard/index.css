@@ -1,0 +1,11 @@
+.main-card {
+  background-color: #fff;
+  /* background: linear-gradient(160deg, #ffd055, #fff); */
+  height: 100%;
+  border: none;
+  color: #162e51;
+}
+
+.card-text {
+  font-size: 18pt;
+}
