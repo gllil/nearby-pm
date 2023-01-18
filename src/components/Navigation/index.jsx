@@ -32,7 +32,7 @@ const Navigation = () => {
         ) : (
           <img
             src={NearbyLogo}
-            width="300px"
+            className="navbar-logo"
             alt="Nearby Property Management Logo"
           />
         )}

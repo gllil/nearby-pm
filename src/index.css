@@ -20,6 +20,10 @@ body {
   font-family: "Urbanist", sans-serif;
 }
 
+.navbar-logo {
+  max-width: 300px;
+}
+
 .red {
   color: red;
 }
@@ -68,4 +72,10 @@ body {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #fd6e1b;
   --bs-btn-disabled-border-color: #fd6e1b;
+}
+
+@media screen and (max-width: 580px) {
+  .navbar-logo {
+    max-width: 180px;
+  }
 }
