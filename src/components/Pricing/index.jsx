@@ -15,22 +15,22 @@ const Pricing = () => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12} md={6} className="my-3">
+        {/* <Col xs={12} md={6} className="my-3">
           <NearbyCard
             title={"Monthly"}
             subtitle={<strong>$299</strong>}
             text={<MonthlyPricing />}
           />
-        </Col>
-        <Col xs={12} md={6} className="my-3">
-          <NearbyCard title={"Per Booking"} text={<PerBooking />} />
+        </Col> */}
+        <Col xs={12} className="my-3">
+          <NearbyCard title={"10% Booking Fee"} text={<PerBooking />} />
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <Col>
           <NearbyCard title={"Optional Add-On's"} text={<OptionalServices />} />
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };

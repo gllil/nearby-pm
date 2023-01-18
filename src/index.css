@@ -20,6 +20,19 @@ body {
   font-family: "Urbanist", sans-serif;
 }
 
+.red {
+  color: red;
+}
+
+.disclaimer {
+  font-size: small;
+}
+
+.error {
+  color: maroon;
+  font-size: medium;
+}
+
 .form-text {
   font-size: small;
 }

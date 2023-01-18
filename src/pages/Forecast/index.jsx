@@ -30,14 +30,21 @@ const Forecast = () => {
   const [grossIncome, setGrossIncome] = useState(0);
   const [expenseTotal, setExpenseTotal] = useState(0);
   const [incomeTotal, setIncomeTotal] = useState(0);
+  const [idCount, setIdCount] = useState(1);
 
   const validationSchema = object().shape({
     cleaningFee: number().required("This field is required"),
     averageNightlyRate: number().required("This field is required"),
     cleaningsAmount: number().required("This field is required"),
-    monthDays: number().min(1).max(30).required("This field is required"),
+    monthDays: number()
+      .min(1)
+      .max(30, "Cannot be more than 30 days")
+      .required("This field is required"),
     ownerCleaningCost: number()
-      .min(parseFloat(mainForm?.cleaningFee))
+      .min(
+        parseFloat(mainForm?.cleaningFee),
+        `Cannot be less than the cleaning fee of $${mainForm?.cleaningFee}`
+      )
       .required("This field is required"),
     landscaping: boolean(),
     poolService: boolean(),
@@ -114,11 +121,9 @@ const Forecast = () => {
 
   useEffect(() => {
     const calculatedIncome =
-      parseFloat(mainForm?.averageNightlyRate) *
-      parseInt(mainForm?.monthDays) *
-      0.85;
+      parseFloat(mainForm?.averageNightlyRate) * parseInt(mainForm?.monthDays);
     setGrossIncome(calculatedIncome);
-  }, [mainForm]);
+  }, [expenses, mainForm]);
 
   const handleMainFormChange = (e) => {
     const { name, value } = e.target;
@@ -129,30 +134,34 @@ const Forecast = () => {
   const addExpenseForm = document.getElementById("addExpenseForm");
 
   const addExpense = (e) => {
-    e.stopPropagation();
-    let expenseList = expenses;
+    let expenseList = expenses || [];
     if (expense?.expenseName && expense?.expenseAmount) {
       expenseList.push(expense);
       setExpenses(expenseList);
       console.log(expenses);
       addExpenseForm.reset();
       setExpense(null);
+      setIdCount(idCount + 1);
     }
+    console.log(idCount);
   };
 
   const handleExpenseChange = (e) => {
     const { name, value } = e.target;
-    setExpense({ ...expense, [name]: value });
+    setExpense({ ...expense, [name]: value, id: idCount });
   };
 
-  const removeExpense = () => {
+  const removeExpense = (id) => {
     let expenseList = expenses;
-    if (expenseList.length > 1) {
-      expenseList.pop();
-      setExpense(expenseList);
-    } else {
-      setExpenses([]);
+    const index = expenseList.map((ex) => ex.id).indexOf(id);
+    if (index > -1) {
+      expenseList.splice(index, 1);
     }
+    // if (expenses.length === 0) {
+    //   setExpenses([]);
+    // }
+    setExpenses([...expenseList]);
+    console.log(expenses);
   };
 
   return (
@@ -185,7 +194,7 @@ const Forecast = () => {
                       parseFloat(values.ownerCleaningCost),
                       parseFloat(values.cleaningsAmount)
                     ).then((res) => {
-                      setIncomeTotal(res);
+                      setIncomeTotal(parseFloat(res).toFixed(2));
                       calculateExpense(
                         expenses,
                         grossIncome,
@@ -193,7 +202,7 @@ const Forecast = () => {
                         values.poolService,
                         values.taxFile
                       ).then((resp) => {
-                        setExpenseTotal(resp);
+                        setExpenseTotal(parseFloat(resp).toFixed(2));
                       });
                     });
                   }}
@@ -227,7 +236,7 @@ const Forecast = () => {
                         <option value={189}>5</option>
                         <option value={199}>6</option>
                       </Form.Select>
-                      <p>
+                      <p className="error">
                         {errors.cleaningFee &&
                           touched.cleaningFee &&
                           errors.cleaningFee}
@@ -250,7 +259,7 @@ const Forecast = () => {
                         Please contact Nearby Property Management for help
                         getting this number.
                       </Form.Text>
-                      <p>
+                      <p className="error">
                         {errors.averageNightlyRate &&
                           touched.averageNightlyRate &&
                           errors.averageNightlyRate}
@@ -261,12 +270,14 @@ const Forecast = () => {
                       <Form.Group as={Row}>
                         <Col xs="9">
                           <RangeSlider
+                            tooltipPlacement="top"
                             max={30}
                             min={1}
                             name="monthDays"
                             value={values.monthDays}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            variant="primary"
                           />
                         </Col>
                         <Col xs={3}>
@@ -280,7 +291,7 @@ const Forecast = () => {
                             className="text-center"
                           />
                         </Col>
-                        <p>
+                        <p className="error">
                           {errors.monthDays &&
                             touched.monthDays &&
                             errors.monthDays}
@@ -309,7 +320,7 @@ const Forecast = () => {
                         more for additional income. ${values.cleaningFee || 169}{" "}
                         is the minimum charge.
                       </Form.Text>
-                      <p>
+                      <p className="error">
                         {errors.ownerCleaningCost &&
                           touched.ownerCleaningCost &&
                           errors.ownerCleaningCost}
@@ -328,7 +339,7 @@ const Forecast = () => {
                         />
                       </InputGroup>
                       <Form.Text>Assumes 4 bookings a month.</Form.Text>
-                      <p>
+                      <p className="error">
                         {errors.cleaningsAmount &&
                           touched.cleaningsAmount &&
                           errors.cleaningsAmount}
@@ -344,7 +355,7 @@ const Forecast = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                           />
-                          <p>
+                          <p className="error">
                             {errors.landscaping &&
                               touched.landscaping &&
                               errors.landscaping}
@@ -359,7 +370,7 @@ const Forecast = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                           />
-                          <p>
+                          <p className="error">
                             {errors.poolService &&
                               touched.poolService &&
                               errors.poolService}
@@ -374,7 +385,7 @@ const Forecast = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                           />
-                          <p>
+                          <p className="error">
                             {errors.taxFile &&
                               touched.taxFile &&
                               errors.taxFile}
@@ -424,31 +435,35 @@ const Forecast = () => {
                               Add Expense
                             </Button>
                           </Form>
-                          <Table striped bordered hover className="mt-2">
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>Expense Name</th>
-                                <th>Expense Amount</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {expenses?.map((exp, i) => (
-                                <tr key={i}>
-                                  <td>{(i + 1).toString()}</td>
-                                  <td>{exp.expenseName}</td>
-                                  <td>{`$${exp.expenseAmount}`}</td>
+                          {expenses?.length > 0 && (
+                            <Table striped bordered hover className="mt-2">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Expense Name</th>
+                                  <th>Expense Amount</th>
                                 </tr>
-                              ))}
-                            </tbody>
-                          </Table>
-                          <Button
-                            onClick={removeExpense}
-                            size="sm"
-                            variant="secondary"
-                          >
-                            Remove Expense
-                          </Button>
+                              </thead>
+                              <tbody>
+                                {expenses.length > 0 &&
+                                  expenses.map((exp, i) => (
+                                    <tr key={i}>
+                                      <td>{(i + 1).toString()}</td>
+                                      <td>{exp.expenseName}</td>
+                                      <td>{`$${exp.expenseAmount}`}</td>
+                                      <td>
+                                        <span
+                                          className="btn"
+                                          onClick={() => removeExpense(exp.id)}
+                                        >
+                                          <i className="red fa-solid fa-trash"></i>
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                            </Table>
+                          )}
                         </Col>
                       </Row>
                       <Row className="mt-4">
