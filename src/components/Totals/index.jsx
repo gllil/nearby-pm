@@ -10,7 +10,8 @@ const Totals = ({ totalExpense, totalIncome }) => {
       <p className="disclaimer">
         Investors should do their own research, get professional advice, and
         conduct due diligence prior to investing. Numbers are approximate and
-        should not be construed as a contract for returns.
+        should not be construed as a contract for returns. This tool does not
+        predict or forecast future earnings.
       </p>
       <h3>Total Income: ${totalIncome}</h3>
       <h3>Total Expense: ${totalExpense}</h3>

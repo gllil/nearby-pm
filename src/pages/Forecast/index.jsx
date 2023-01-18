@@ -170,6 +170,7 @@ const Forecast = () => {
         <Col>
           <NearbyCard
             title={"Property Income Analysis"}
+            subtitle="This tool calculates a monthly average of what you can potentially make anually."
             text={
               <div>
                 <Formik
