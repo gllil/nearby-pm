@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import "./index.css";
 const NearbyCard = ({
+  id,
   title,
   subtitle,
   text,
@@ -15,6 +16,7 @@ const NearbyCard = ({
 }) => {
   return (
     <Card
+      id={id}
       className={`main-card ${className}`}
       style={{
         color: `${blue ? `#fff` : "#162e51"}`,

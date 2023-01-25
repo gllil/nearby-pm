@@ -52,7 +52,6 @@ const Forecast = () => {
   });
 
   const additionalServices = (ls, ps, tx) => {
-    console.log(mainForm?.landscaping);
     let fee = 0;
     let lsfee = 0;
     let psfee = 0;
@@ -98,7 +97,6 @@ const Forecast = () => {
       additionalExpenses +
       additionalServices(lsfee, psfee, txfee);
 
-    console.log(completeExpense);
     return new Promise(function (resolve, reject) {
       resolve(parseFloat(completeExpense));
     });
@@ -110,14 +108,16 @@ const Forecast = () => {
     ownCleanCost,
     numberOfCleanings
   ) => {
-    console.log(income, cleaningCost, ownCleanCost, numberOfCleanings);
-
     const cleaningIncome = (ownCleanCost - cleaningCost) * numberOfCleanings;
     const combinedIncome = parseFloat(income) + parseFloat(cleaningIncome);
     return new Promise(function (resolve, reject) {
       resolve(combinedIncome);
     });
   };
+
+  useEffect(() => {
+    scroll(0, 0);
+  }, []);
 
   useEffect(() => {
     const calculatedIncome =
@@ -128,7 +128,6 @@ const Forecast = () => {
   const handleMainFormChange = (e) => {
     const { name, value } = e.target;
     setMainForm({ ...mainForm, [name]: value });
-    console.log(mainForm);
   };
 
   const addExpenseForm = document.getElementById("addExpenseForm");
@@ -138,12 +137,11 @@ const Forecast = () => {
     if (expense?.expenseName && expense?.expenseAmount) {
       expenseList.push(expense);
       setExpenses(expenseList);
-      console.log(expenses);
+
       addExpenseForm.reset();
       setExpense(null);
       setIdCount(idCount + 1);
     }
-    console.log(idCount);
   };
 
   const handleExpenseChange = (e) => {
@@ -169,7 +167,7 @@ const Forecast = () => {
       <Row>
         <Col>
           <NearbyCard
-            title={"Property Income Analysis"}
+            title={"Vacation Property Income Analysis"}
             subtitle="This tool calculates a monthly average of what you can potentially make anually."
             text={
               <div>
@@ -187,8 +185,6 @@ const Forecast = () => {
                   validateOnChange
                   validationSchema={validationSchema}
                   onSubmit={(values) => {
-                    console.log(values);
-
                     calculateIncome(
                       grossIncome,
                       parseFloat(values.cleaningFee),
@@ -204,6 +200,7 @@ const Forecast = () => {
                         values.taxFile
                       ).then((resp) => {
                         setExpenseTotal(parseFloat(resp).toFixed(2));
+                        location.href = "#totals";
                       });
                     });
                   }}
@@ -216,6 +213,7 @@ const Forecast = () => {
                     errors,
                     touched,
                     isSubmitting,
+                    resetForm,
                   }) => (
                     <Form
                       onSubmit={handleSubmit}
@@ -292,6 +290,11 @@ const Forecast = () => {
                             className="text-center"
                           />
                         </Col>
+                        <Form.Text>
+                          23 days is based on a 75% occupancy rate. Change and
+                          adjust to calculate income at different occupancy
+                          rates.
+                        </Form.Text>
                         <p className="error">
                           {errors.monthDays &&
                             touched.monthDays &&
@@ -319,7 +322,8 @@ const Forecast = () => {
                       <Form.Text>
                         Cleaning Fees are passed on to the guest. You can charge
                         more for additional income. ${values.cleaningFee || 169}{" "}
-                        is the minimum charge.
+                        is the minimum charge based on the number of rooms
+                        selected.
                       </Form.Text>
                       <p className="error">
                         {errors.ownerCleaningCost &&
@@ -334,7 +338,6 @@ const Forecast = () => {
                           name="cleaningsAmount"
                           type="number"
                           value={values.cleaningsAmount}
-                          min={4}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
@@ -347,7 +350,7 @@ const Forecast = () => {
                       </p>
                       <Row className="mt-4">
                         <h3>Optional Services</h3>
-                        <Col>
+                        <Col xs={12} sm={6} md={4}>
                           <Form.Check
                             name="landscaping"
                             type="switch"
@@ -362,7 +365,7 @@ const Forecast = () => {
                               errors.landscaping}
                           </p>
                         </Col>
-                        <Col>
+                        <Col xs={12} sm={6} md={4}>
                           <Form.Check
                             name="poolService"
                             type="switch"
@@ -377,7 +380,7 @@ const Forecast = () => {
                               errors.poolService}
                           </p>
                         </Col>
-                        <Col>
+                        <Col xs={12} sm={6} md={4}>
                           <Form.Check
                             name="taxFile"
                             type="switch"
@@ -408,7 +411,7 @@ const Forecast = () => {
                                     Expense Name
                                   </Form.Label>
                                   <Form.Control
-                                    placeholder="ex. HOA Fees"
+                                    placeholder="ex. Mortgage, HOA Fees, etc."
                                     name="expenseName"
                                     type="text"
                                   />
@@ -474,14 +477,31 @@ const Forecast = () => {
                           <h5>Florida State and County Room Tax: 14%</h5>
                         </Col>
                       </Row>
-                      <Button size="lg" type="submit">
-                        Calculate
-                      </Button>
+                      <Row>
+                        <Col>
+                          <Button size="lg" type="submit">
+                            Calculate
+                          </Button>
+                        </Col>
+                      </Row>
+                      <Row className="mt-2">
+                        <Col>
+                          <Button
+                            onClick={() => {
+                              location.reload();
+                            }}
+                            variant="secondary"
+                          >
+                            Reset
+                          </Button>
+                        </Col>
+                      </Row>
                     </Form>
                   )}
                 </Formik>
 
                 <NearbyCard
+                  id="totals"
                   blue
                   text={
                     <Totals

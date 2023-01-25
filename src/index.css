@@ -53,6 +53,12 @@ body {
   width: 300px;
   z-index: 2;
 }
+.positive {
+  color: greenyellow;
+}
+.negative {
+  color: red;
+}
 
 .totalIncome {
   background-color: #162e51;
