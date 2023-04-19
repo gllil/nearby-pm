@@ -58,6 +58,13 @@ const TitleSection = () => {
           />
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <p className="disclaimer text-center">
+            * Select services are optional
+          </p>
+        </Col>
+      </Row>
     </Container>
   );
 };

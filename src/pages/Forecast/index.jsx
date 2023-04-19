@@ -63,7 +63,7 @@ const Forecast = () => {
       lsfee = 0;
     }
     if (ps === true) {
-      psfee = 175;
+      psfee = 125;
     }
     if (ps === false) {
       psfee = 0;
@@ -81,7 +81,7 @@ const Forecast = () => {
 
   const calculateExpense = (expenseList, income, lsfee, psfee, txfee) => {
     const bookingFee = parseFloat(income) * 0.1;
-    const tax = parseFloat(income) * 0.14;
+    const tax = parseFloat(income) * 0.15;
     const expenseAmounts = expenseList.map((expense) =>
       parseFloat(expense.expenseAmount)
     );
@@ -92,7 +92,7 @@ const Forecast = () => {
     );
     const completeExpense =
       bookingFee +
-      299 +
+      199 +
       tax +
       additionalExpenses +
       additionalServices(lsfee, psfee, txfee);
@@ -369,7 +369,7 @@ const Forecast = () => {
                           <Form.Check
                             name="poolService"
                             type="switch"
-                            label="Pool Service? $175"
+                            label="Pool Service? $125"
                             value={values.poolService}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -473,8 +473,8 @@ const Forecast = () => {
                       <Row className="mt-4">
                         <Col>
                           <h5>Booking Fee: 10%</h5>
-                          <h5>Monthly Management Fee: $299</h5>
-                          <h5>Florida State and County Room Tax: 14%</h5>
+                          <h5>Monthly Management Fee: $199</h5>
+                          <h5>Host Channel Fee: 15%</h5>
                         </Col>
                       </Row>
                       <Row>

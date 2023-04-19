@@ -11,26 +11,21 @@ const Pricing = () => {
     <Container id="pricing">
       <Row>
         <Col>
-          <h1 className="text-center my-5 pricing-title">Pricing</h1>
+          <h1 className="text-center my-5 pricing-title">We Offer Value!</h1>
         </Col>
       </Row>
       <Row>
-        {/* <Col xs={12} md={6} className="my-3">
-          <NearbyCard
-            title={"Monthly"}
-            subtitle={<strong>$299</strong>}
-            text={<MonthlyPricing />}
-          />
-        </Col> */}
-        <Col xs={12} className="my-3">
-          <NearbyCard title={"10% Booking Fee"} text={<PerBooking />} />
+        <Col xs={12} md={6} lg={4} className="my-3">
+          <NearbyCard text={<MonthlyPricing />} />
+        </Col>
+        <Col xs={12} md={6} lg={4} className="my-3">
+          <NearbyCard text={<PerBooking />} />
+        </Col>
+        <Col xs={12} md={12} lg={4} className="my-3">
+          <NearbyCard text={<OptionalServices />} />
         </Col>
       </Row>
-      {/* <Row>
-        <Col>
-          <NearbyCard title={"Optional Add-On's"} text={<OptionalServices />} />
-        </Col>
-      </Row> */}
+      <Row></Row>
     </Container>
   );
 };

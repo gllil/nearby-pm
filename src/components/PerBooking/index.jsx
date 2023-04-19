@@ -17,13 +17,13 @@ const PerBooking = () => {
               <span className="fa-li">
                 <i className="fa-solid fa-hand-point-right"></i>
               </span>
-              Marketing on 8+ Channels
+              Marketing on 5 Channels
             </li>
             <li>
               <span className="fa-li">
                 <i className="fa-solid fa-hand-point-right"></i>
               </span>
-              Dynamic Pricing
+              Automated Dynamic Pricing
             </li>
           </ul>
         </li>
@@ -31,13 +31,13 @@ const PerBooking = () => {
           <span className="fa-li">
             <i className="fa-solid fa-check-square"></i>
           </span>
-          Professional Cleaning <strong>$220*</strong>
+          Professional Cleaning
         </li>
         <li>
           <span className="fa-li">
             <i className="fa-solid fa-check-square"></i>
           </span>
-          Property Damage Protection <strong>$30**</strong>
+          Property Damage Protection (Up to $3000 per booking)
         </li>
       </ul>
       <p></p>

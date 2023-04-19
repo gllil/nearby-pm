@@ -8,19 +8,19 @@ const OptionalServices = () => {
           <span className="fa-li">
             <i className="fa-solid fa-check-square"></i>
           </span>
-          Pool Services - <strong>$175/Month</strong>
+          Pool Maintenance
         </li>
         <li>
           <span className="fa-li">
             <i className="fa-solid fa-check-square"></i>
           </span>
-          Landscaping - <strong>$175/Month</strong>
+          Manage Landscaping
         </li>
         <li>
           <span className="fa-li">
             <i className="fa-solid fa-check-square"></i>
           </span>
-          Business State and County Tax Filings - <strong>$30/Month</strong>
+          Manage Business State and County Tax Filings
         </li>
       </ul>
     </div>

@@ -20,7 +20,7 @@ const MonthlyPricing = () => {
           <span className="fa-li">
             <i className="fa-solid fa-check-square"></i>
           </span>
-          24/7 Guest Concierge
+          24/7 Guest Support
         </li>
         <li>
           <span className="fa-li">

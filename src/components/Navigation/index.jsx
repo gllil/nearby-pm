@@ -13,11 +13,11 @@ const Navigation = () => {
         </Navbar.Brand>
         {location.pathname === "/" ? (
           <Nav>
-            <Nav.Item className="nav-phone">
+            {/* <Nav.Item className="nav-phone">
               <Nav.Link href="#pricing">
                 <h4>Pricing</h4>
               </Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
             <Nav.Item className="nav-phone">
               <Nav.Link href="#contact">
                 <h4>Contact Us</h4>

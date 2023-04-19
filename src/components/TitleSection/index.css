@@ -6,3 +6,9 @@
 .main-subtitle {
   color: #fff;
 }
+
+@media screen and (max-width: 580px) {
+  .main-title {
+    font-size: 50px;
+  }
+}
