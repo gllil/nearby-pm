@@ -57,7 +57,7 @@ const Forecast = () => {
     let psfee = 0;
     let txfee = 0;
     if (ls === true) {
-      lsfee = 175;
+      lsfee = 150;
     }
     if (ls === false) {
       lsfee = 0;
@@ -354,7 +354,7 @@ const Forecast = () => {
                           <Form.Check
                             name="landscaping"
                             type="switch"
-                            label="Landscaping? $175"
+                            label="Landscaping? $150"
                             value={values.landscaping}
                             onChange={handleChange}
                             onBlur={handleBlur}
