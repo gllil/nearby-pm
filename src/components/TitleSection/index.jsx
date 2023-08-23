@@ -8,10 +8,10 @@ const TitleSection = () => {
     <Container>
       <Row>
         <Col xs={12} md={8} className="mb-5">
-          <h1 className="main-title">Let Us Make Short Term Rentals Easy!</h1>
+          <h1 className="main-title">Elevate Your Property Investment</h1>
           <h1 className="main-subtitle">
-            We want to make things simple and help you keep more of your
-            profits.
+            Unlock the Power of Stress-Free Management. Experience Seamless
+            Short-Term and Long-Term Rental Services Now!
           </h1>
           <Row>
             <Col className="text-start">

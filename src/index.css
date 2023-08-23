@@ -84,4 +84,8 @@ body {
   .navbar-logo {
     max-width: 180px;
   }
+
+  .contact {
+    font-size: 14px;
+  }
 }

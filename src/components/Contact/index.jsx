@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import ContactInfo from "../ContactInfo";
 import NearbyCard from "../NearbyCard";
 import "./index.css";
+import ContactForm from "../ContactForm";
 
 const Contact = () => {
   return (
@@ -15,8 +16,16 @@ const Contact = () => {
       <Row>
         <Col>
           <NearbyCard
-            title={"Get a free consultation"}
-            text={<ContactInfo />}
+            title={"Learn More"}
+            subtitle={
+              "Have questions? Send us a message and we'll respond within 24 hours."
+            }
+            text={
+              <>
+                <ContactForm />
+                <ContactInfo />
+              </>
+            }
           />
         </Col>
       </Row>

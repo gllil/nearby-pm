@@ -16,6 +16,7 @@
     "react-bootstrap": "^2.7.0",
     "react-bootstrap-range-slider": "^3.0.8",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha-v3": "^1.10.1",
     "react-intl": "^6.2.5",
     "react-router-dom": "^6.6.1",
     "yup": "^0.32.11"

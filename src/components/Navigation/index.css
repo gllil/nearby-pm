@@ -11,3 +11,17 @@
 .navbar-nav .nav-link.active {
   color: #ff8036;
 }
+
+.hover-dark-bg:hover {
+  /* background: linear-gradient(90deg, #162e51, rgba(22, 46, 81, 0.7)) fixed; */
+  background-color: rgba(22, 46, 81, 0.7);
+}
+
+.menu-image {
+  color: #fd6e1b;
+}
+.navbar-toggler,
+.navbar-toggler:focus {
+  border: none;
+  box-shadow: none;
+}

@@ -11,7 +11,7 @@ const Pricing = () => {
     <Container id="pricing">
       <Row>
         <Col>
-          <h1 className="text-center my-5 pricing-title">We Offer Value!</h1>
+          <h1 className="text-center my-5 pricing-title">Short Term Rentals</h1>
         </Col>
       </Row>
       <Row>
